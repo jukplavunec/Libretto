@@ -25,7 +25,7 @@ def run_api_app() -> None:
 
     uvicorn.run(
         app,
-        host="0.0.0.0",
-        port=8000,
+        host=settings.app.app_host,
+        port=settings.app.app_port,
         log_config=None,
     )
