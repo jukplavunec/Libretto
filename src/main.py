@@ -1,8 +1,8 @@
 import uvicorn
 from fastapi import FastAPI
-from fastapi.templating import Jinja2Templates
 
-# from src.config import settings
+from src.config import settings
+from src.app import get_app
 from src.logger import configure_logger
 
 
@@ -17,7 +17,7 @@ def run_api_app() -> None:
         redoc_url=None,
     )
 
-    # app.mount(settings.app.app_mount)
+    app.mount(settings.app.app_mount, get_app())
 
     @app.get("/")
     async def index() -> dict[str, str]:
