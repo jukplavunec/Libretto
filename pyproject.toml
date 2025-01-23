@@ -18,6 +18,8 @@ typer = "^0.15.1"
 structlog = "^25.1.0"
 dynaconf = "^3.2.7"
 alembic = "^1.14.1"
+asyncpg = "^0.30.0"
+greenlet = "^3.1.1"
 
 
 [build-system]

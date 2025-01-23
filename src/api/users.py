@@ -24,6 +24,3 @@ async def update_user(user_id: str):
     if user_id != "me":
         raise HTTPException(status_code=404, detail="User not found")
     return {"user_id": user_id}
-
-
-

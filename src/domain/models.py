@@ -27,9 +27,10 @@ class Book:
 
 
 class User:
-    def __init__(self, name: str, user_id: UUID) -> None:
+    def __init__(self, name: str, user_id: int, email: str) -> None:
         self.name = name
         self.user_id = user_id
+        self.email = email
         self.user_state = UserState.COMMON
         self.issued_books = []
 
@@ -68,7 +69,7 @@ class Loan:
         if self.returned_date and self.returned_date > self.due_date:
             overdue_days = (self.returned_date - self.due_date).days
             return self._calculate_fine_by_strategy(overdue_days, self.user)
-        return 0
+        return Decimal(0.0)
 
     def _calculate_fine_by_strategy(self, overdue_days: int, user: User) -> Decimal:
         COEF_BY_STATUSES = {
@@ -76,4 +77,4 @@ class Loan:
             UserState.VIP: 0.5,
             UserState.ADMIN: 0.1,
         }
-        return overdue_days * COEF_BY_STATUSES[user.user_state]
+        return Decimal(overdue_days * COEF_BY_STATUSES[user.user_state])

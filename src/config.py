@@ -1,9 +1,9 @@
 from dynaconf import Dynaconf
 from pydantic import BaseModel
 
-settings = Dynaconf(
+dyna_settings = Dynaconf(
     envvar_prefix="APP",
-    settings_files=["settings.toml", ".secrets.toml"],
+    settings_files=["settings.yaml"],
 )
 
 
@@ -17,7 +17,7 @@ class DBConfig(BaseModel):
     @property
     def db_url(self) -> str:
         return f"postgresql+asyncpg://{self.db_user}:{self.db_password}@{self.db_host}:{self.db_port}/{self.db_name}"
-    
+
 
 class APPConfig(BaseModel):
     app_name: str
@@ -32,12 +32,7 @@ class Settings(BaseModel):
     db: DBConfig
 
 
-dyna_settings = Dynaconf(
-    envvar_prefix="APP",
-    settings_files=["settings.toml"],
-)
-
 settings = Settings(
-    app=dyna_settings["app_settings"],
-    db=dyna_settings["db_settings"],
+    app=APPConfig(**dyna_settings["app_settings"]),
+    db=DBConfig(**dyna_settings["db_settings"]),
 )
