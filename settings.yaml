@@ -11,3 +11,8 @@ db_settings:
   db_password: "mypassword"
   db_host: "localhost"
   db_port: 5432
+
+user_coefficients:
+  common: 1
+  vip: 0.5
+  admin: 0.0

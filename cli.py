@@ -13,7 +13,7 @@ class Apps(str, Enum):
     background_task = "background_task"
 
 @cli.command(help="Run the application")
-def main(
+def api(
     app: Annotated[Apps, Argument(help="The application to run")] = Apps.api
 ):
     match app:

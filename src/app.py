@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from src.api.routes import ROUTES
+from src.api import ROUTES
 
 
 def setup_routers(app: FastAPI) -> None:

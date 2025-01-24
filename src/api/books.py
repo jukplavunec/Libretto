@@ -1,9 +1,12 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 
+from src.helpers.route_classes import MiddlewareRoute
+
 
 books_router = APIRouter(
     tags=["Books"],
     responses={404: {"description": "Not found"}},
+    route_class=MiddlewareRoute,
 )
 
 

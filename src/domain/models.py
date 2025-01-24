@@ -3,6 +3,7 @@ from decimal import Decimal
 from uuid import UUID
 
 from src.domain.enums import BookState, UserState
+from src.config import settings
 
 
 class Book:
@@ -73,8 +74,8 @@ class Loan:
 
     def _calculate_fine_by_strategy(self, overdue_days: int, user: User) -> Decimal:
         COEF_BY_STATUSES = {
-            UserState.COMMON: 1,
-            UserState.VIP: 0.5,
-            UserState.ADMIN: 0.1,
+            UserState.COMMON: settings.user_coefficients.common,
+            UserState.VIP: settings.user_coefficients.vip,
+            UserState.ADMIN: settings.user_coefficients.admin,
         }
         return Decimal(overdue_days * COEF_BY_STATUSES[user.user_state])

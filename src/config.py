@@ -27,12 +27,19 @@ class APPConfig(BaseModel):
     app_mount: str
 
 
+class UserCoefficients(BaseModel):
+    common: float
+    vip: float
+    admin: float
+
 class Settings(BaseModel):
     app: APPConfig
     db: DBConfig
+    user_coefficients: UserCoefficients
 
 
 settings = Settings(
     app=APPConfig(**dyna_settings["app_settings"]),
     db=DBConfig(**dyna_settings["db_settings"]),
+    user_coefficients=UserCoefficients(**dyna_settings["user_coefficients"]),
 )
