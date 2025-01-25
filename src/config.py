@@ -33,9 +33,19 @@ class UserCoefficients(BaseModel):
     admin: float
 
 
+class RedisConfig(BaseModel):
+    redis_host: str
+    redis_port: int
+
+    @property
+    def redis_url(self) -> str:
+        return f"redis://{self.redis_host}:{self.redis_port}"
+
+
 class Settings(BaseModel):
     app: APPConfig
     db: DBConfig
+    redis_settings: RedisConfig
     user_coefficients: UserCoefficients
 
 
@@ -43,4 +53,5 @@ settings = Settings(
     app=APPConfig(**dyna_settings["app_settings"]),
     db=DBConfig(**dyna_settings["db_settings"]),
     user_coefficients=UserCoefficients(**dyna_settings["user_coefficients"]),
+    redis_settings=RedisConfig(**dyna_settings["redis_settings"]),
 )

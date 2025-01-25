@@ -17,16 +17,16 @@ class UsersModel(Base):
     created_at = Column(DateTime, default=func.now(), onupdate=func.now())
     updated_at = Column(DateTime, default=func.now(), onupdate=func.now())
 
-    def to_orm(self, user: User) -> UsersModel:
-        # TODO: make mapper class for all to_domain -> to_orm
-        return UsersModel(
-            email=user.email,
-            username=user.name,
-            user_state=user.user_state,
-        )
+    # def to_orm(self, user: User) -> UsersModel:
+    #     # TODO: make mapper class for all to_domain -> to_orm
+    #     return UsersModel(
+    #         email=user.email,
+    #         username=user.name,
+    #         user_state=user.user_state,
+    #     )
 
-    def to_domain(self) -> User:
-        return User(name=self.username, email=self.email, user_state=self.user_state)
+    # def to_domain(self) -> User:
+    #     return User(name=str(self.username), email=str(self.email), user_state=self.user_state)
 
     def __repr__(self):
         return f"<User {self.email}>"

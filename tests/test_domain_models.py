@@ -21,7 +21,7 @@ def test_book_change_state():
 
 
 def test_user_borrow_book():
-    user = User(name=faker.pystr(), user_id=uuid4())
+    user = User(name=faker.pystr(), user_id=uuid4(), email=faker.email())
     book = Book(
         title=faker.pystr(),
         author=faker.pystr(),
@@ -36,7 +36,7 @@ def test_user_borrow_book():
 
 
 def test_user_return_book():
-    user = User(name=faker.pystr(), user_id=uuid4())
+    user = User(name=faker.pystr(), user_id=uuid4(), email=faker.email())
     book = Book(
         title=faker.pystr(),
         author=faker.pystr(),
@@ -53,7 +53,7 @@ def test_user_return_book():
 
 
 def test_loan_mark_returned():
-    user = User(name=faker.pystr(), user_id=uuid4())
+    user = User(name=faker.pystr(), user_id=uuid4(), email=faker.email())
     book = Book(
         title=faker.pystr(),
         author=faker.pystr(),
@@ -68,7 +68,7 @@ def test_loan_mark_returned():
 
 
 def test_loan_calculate_fine():
-    user = User(name=faker.pystr(), user_id=uuid4())
+    user = User(name=faker.pystr(), user_id=uuid4(), email=faker.email())
     book = Book(
         title=faker.pystr(),
         author=faker.pystr(),

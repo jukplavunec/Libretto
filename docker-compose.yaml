@@ -16,6 +16,15 @@ services:
       - mynetwork
     restart: always
 
+  redis:
+    image: redis
+    container_name: redis
+    ports:
+      - "6379:6379"
+    networks:
+      - mynetwork
+    restart: always
+
 volumes:
   postgres_data:
     driver: local

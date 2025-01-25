@@ -33,7 +33,7 @@ class User:
         self.user_id = user_id
         self.email = email
         self.user_state = UserState.COMMON
-        self.issued_books = []
+        self.issued_books: list[Book] = []
 
     def borrow_book(self, book: Book) -> None:
         if book.state == BookState.AVAILABLE:
@@ -61,7 +61,7 @@ class Loan:
         self.user = user
         self.book = book
         self.due_date = due_date
-        self.returned_date = None
+        self.returned_date: datetime | None = None
 
     def mark_returned(self) -> None:
         self.returned_date = datetime.now()

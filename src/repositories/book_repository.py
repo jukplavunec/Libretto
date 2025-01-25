@@ -4,7 +4,7 @@ from src.repositories.base_repository import BaseRepository
 
 class BookRepository(BaseRepository):
     def get_all(self, session: AsyncSession, id: str) -> list[object]:
-        pass
+        return []
 
     def create(self, session: AsyncSession, object: object) -> None:
         pass

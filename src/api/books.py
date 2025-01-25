@@ -16,14 +16,14 @@ async def get_books():
 
 
 @books_router.get("/{book_id}")
-async def get_book(book_id: str):
+async def get_book(book_id: str) -> dict[str, str]:
     if book_id != "my":
         raise HTTPException(status_code=404, detail="Book not found")
     return {"book_id": book_id}
 
 
 @books_router.put("/{book_id}")
-async def update_book(book_id: str):
+async def update_book(book_id: str) -> dict[str, str]:
     if book_id != "my":
         raise HTTPException(status_code=404, detail="Book not found")
     return {"book_id": book_id}

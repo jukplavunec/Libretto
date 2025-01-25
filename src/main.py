@@ -3,6 +3,7 @@ from fastapi import FastAPI
 
 from src.config import settings
 from src.app import get_app
+from src.lifespan import lifespan
 from src.logger import configure_logger
 
 
@@ -15,6 +16,7 @@ def run_api_app() -> None:
     app = FastAPI(
         docs_url=None,
         redoc_url=None,
+        lifespan=lifespan,
     )
 
     app.mount(settings.app.app_mount, get_app())
