@@ -32,6 +32,7 @@ class UserCoefficients(BaseModel):
     vip: float
     admin: float
 
+
 class Settings(BaseModel):
     app: APPConfig
     db: DBConfig

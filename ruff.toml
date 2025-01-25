@@ -1,0 +1,16 @@
+[lint]
+select = ["ALL"]
+exclude = ["tests"]
+ignore = [
+    "D203",
+    "D213",
+    "COM812"
+]
+
+[lint.isort]
+known-first-party = ["Libretto"]
+combine-as-imports = true
+order-by-type = true
+
+[lint.pycodestyle]
+max-line-length = 88

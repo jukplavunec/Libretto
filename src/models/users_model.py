@@ -26,16 +26,10 @@ class UsersModel(Base):
         )
 
     def to_domain(self) -> User:
-        return User(
-            name=self.username,
-            email=self.email,
-            user_state=self.user_state
-        )
+        return User(name=self.username, email=self.email, user_state=self.user_state)
 
     def __repr__(self):
         return f"<User {self.email}>"
 
     def __str__(self):
         return f"<User {self.email}>"
-    
-

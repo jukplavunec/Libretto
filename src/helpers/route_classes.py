@@ -6,10 +6,13 @@ from fastapi.routing import APIRoute
 
 logger = structlog.getLogger()
 
+
 class MiddlewareRoute(APIRoute):
     _before_request_chain: list[Callable[[Request], Awaitable[None]]] = []
     _after_response_chain: list[Callable[[Request, Response], Awaitable[None]]] = []
-    _exception_handlers: dict[type[Exception], Callable[[Request, Exception], Awaitable[Response]]] = {}
+    _exception_handlers: dict[
+        type[Exception], Callable[[Request, Exception], Awaitable[Response]]
+    ] = {}
     _default_exc_handler: Callable[[Request, Exception], Awaitable[Response]]
 
     @classmethod
@@ -33,7 +36,8 @@ class MiddlewareRoute(APIRoute):
         cls,
         *exceptions: type[Exception],
     ) -> Callable[
-        [Callable[[Request, Exception], Awaitable[Response]]], Callable[[Request, Exception], Awaitable[Response]]
+        [Callable[[Request, Exception], Awaitable[Response]]],
+        Callable[[Request, Exception], Awaitable[Response]],
     ]:
         def _handler(
             processor: Callable[[Request, Exception], Awaitable[Response]],
@@ -45,14 +49,18 @@ class MiddlewareRoute(APIRoute):
         return _handler
 
     @classmethod
-    def set_default_exception_handler(cls, processor: Callable[[Request, Exception], Awaitable[Response]]) -> None:
+    def set_default_exception_handler(
+        cls, processor: Callable[[Request, Exception], Awaitable[Response]]
+    ) -> None:
         cls._default_exc_handler = processor
 
     async def _process_before_request_chain(self, request: Request) -> None:
         for processor in self._before_request_chain:
             await processor(request)
 
-    async def _process_after_response_chain(self, request: Request, response: Response) -> None:
+    async def _process_after_response_chain(
+        self, request: Request, response: Response
+    ) -> None:
         for processor in self._after_response_chain:
             await processor(request, response)
 
@@ -66,7 +74,9 @@ class MiddlewareRoute(APIRoute):
                 await self._process_after_response_chain(request, response)
                 return response
             except Exception as ex:
-                handler = self._exception_handlers.get(ex.__class__, MiddlewareRoute._default_exc_handler)
+                handler = self._exception_handlers.get(
+                    ex.__class__, MiddlewareRoute._default_exc_handler
+                )
                 return await handler(request, ex)
 
         return middleware_handler
