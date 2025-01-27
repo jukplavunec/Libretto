@@ -23,3 +23,7 @@ upgrade:
 downgrade:
 	@echo "Downgrading database..."
 	poetry run python cli.py migration downgrade
+
+test:
+	@echo "Running tests..."
+	poetry run pytest -v
